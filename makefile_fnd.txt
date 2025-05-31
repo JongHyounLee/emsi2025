@@ -1,0 +1,12 @@
+all : main.elf
+        scp main.elf ecube@192.168.50.206:/home/ecube/sensors/FND
+        rm -f fnd.o libMyPeri.a main.elf
+
+fnd.o : fnd.h fnd.c
+        arm-linux-gnueabi-gcc -o fnd.o -c fnd.c 
+
+libMyPeri.a : fnd.o
+        arm-linux-gnueabi-ar rc libMyPeri.a fnd.o
+
+main.elf : main.c libMyPeri.a
+        arm-linux-gnueabi-gcc -o main.elf main.c -l MyPeri -L.
