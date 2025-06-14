@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include "socket.h"
+#include "client.h"
 pthread_t GyroTh;
 pthread_t Buzz;
 static pthread_mutex_t lock;

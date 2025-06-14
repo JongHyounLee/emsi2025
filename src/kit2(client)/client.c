@@ -3,35 +3,12 @@
 #include <string.h>
 #include <unistd.h>
 #include <arpa/inet.h>
-#include "socket.h"
+#include "client.h"
 
 
 /*
     fail to coneect : reutrn -1
 */ 
-
-int init_server(int PORT) {
-    int sock, client_fd;
-    struct sockaddr_in server_addr, client_addr;
-
-    sock = socket(AF_INET, SOCK_STREAM, 0);
-    if (sock == -1) {
-        perror("socket failed");
-        return 1;
-    }
-
-    server_addr.sin_family = AF_INET;
-    server_addr.sin_addr.s_addr = INADDR_ANY; // 모든 IP에서 수신
-    server_addr.sin_port = htons(PORT);
-
-    bind(sock, (struct sockaddr *)&server_addr, sizeof(server_addr));
-    listen(sock, 1);
-
-    printf("Waiting for message..\n");
-
-    return sock; 
-}
-
 int connect_server(char *SERVER_ADDRESS, int PORT) {
     int sock;
     struct sockaddr_in server_addr;

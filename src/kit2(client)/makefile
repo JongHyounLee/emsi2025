@@ -16,12 +16,12 @@ gyro.o : gyro.h gyro.c
 	arm-linux-gnueabi-gcc -c gyro.c -o gyro.o
 	echo "3. make gyro.o"
 
-socket.o : socket.h socket.c 
-	arm-linux-gnueabi-gcc -c socket.c -o socket.o
-	echo "4. make socket.o"
+client.o : client.h client.c 
+	arm-linux-gnueabi-gcc -c client.c -o client.o
+	echo "4. make client.o"
 	
-libMyPeri.a : button.o buzzer.o gyro.o
-	arm-linux-gnueabi-ar rc libMyPeri.a button.o buzzer.o gyro.o
+libMyPeri.a : button.o buzzer.o gyro.o client.o
+	arm-linux-gnueabi-ar rc libMyPeri.a button.o buzzer.o gyro.o client.o
 	echo "[make libMyPeri.a]"
 
 main.elf : main.c libMyPeri.a
