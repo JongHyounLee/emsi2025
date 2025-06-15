@@ -1,0 +1,1 @@
+cmd_/home/ausu/sensors/FND/drv/fnddrv.ko := /home/ausu/develop/gcc-linaro-5.5.0-2017.10-x86_64_arm-linux-gnueabi/bin/arm-linux-gnueabi-ld -EL -r  -T /home/ausu/develop/linux_kernel/scripts/module-common.lds --build-id  -o /home/ausu/sensors/FND/drv/fnddrv.ko /home/ausu/sensors/FND/drv/fnddrv.o /home/ausu/sensors/FND/drv/fnddrv.mod.o
