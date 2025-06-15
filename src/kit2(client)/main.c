@@ -34,8 +34,6 @@ void *readChange(void *arg)
 
 }
 
-
-
 void initSensors() {
     buttonInit();
     buzzerInit();

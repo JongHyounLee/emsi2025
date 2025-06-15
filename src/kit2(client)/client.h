@@ -1,5 +1,8 @@
 #pragma once
 
+#define GAMEREADY -1 
+#define BUTTONPRESSED 5
+
 typedef struct {
     int gameReady;
     int cursor;

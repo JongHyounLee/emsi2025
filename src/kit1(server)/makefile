@@ -1,21 +1,37 @@
-all : main.elf
-	scp main.elf ecube@192.168.137.80:/home/ecube/jw_serverTest
+all : mainFinal.elf
+	scp mainFinal.elf ecube@192.168.137.80:/home/ecube/jw_serverTest
 	echo "[send main.elf]"
-	rm -f *.o *.elf
+	rm -f *.o 
 	echo "[remove files]"
+
+led.o : led.h led.c 
+	arm-linux-gnueabi-gcc -c led.c -o led.o
+	echo "1. make led.o"
+
+fnd.o : fnd.h fnd.c 
+	arm-linux-gnueabi-gcc -c fnd.c -o fnd.o
+	echo "2. make fnd.o"
 
 buzzer.o : buzzer.h buzzer.c
 	arm-linux-gnueabi-gcc -c buzzer.c -o buzzer.o
-	echo "2. make buzzer.o"
+	echo "3. make buzzer.o"
 
 server.o : server.h server.c 
 	arm-linux-gnueabi-gcc -c server.c -o server.o
 	echo "4. make server.o"
 	
-libMyPeri.a : server.o buzzer.o 
-	arm-linux-gnueabi-ar rc libMyPeri.a buzzer.o server.o
+textlcd.o : textlcd.h textlcd.c 
+	arm-linux-gnueabi-gcc -c textlcd.c -o textlcd.o
+	echo "5. make textlcd.o"
+
+colorLED.o : colorLED.h colorLED.c 
+	arm-linux-gnueabi-gcc -c colorLED.c -o colorLED.o
+	echo "6. make colorLED.o"
+
+libMyPeri.a : led.o fnd.o server.o buzzer.o textlcd.o colorLED.o 
+	arm-linux-gnueabi-ar rc libMyPeri.a led.o fnd.o buzzer.o server.o textlcd.o colorLED.o
 	echo "[make libMyPeri.a]"
 
-main.elf : main.c libMyPeri.a  
-	arm-linux-gnueabi-gcc -o main.elf main.c -l MyPeri -L. -lpthread 
+mainFinal.elf : mainFinal.c libMyPeri.a  
+	arm-linux-gnueabi-gcc -o mainFinal.elf mainFinal.c -l MyPeri -L. -lpthread 
 	echo "[make main.elf]"

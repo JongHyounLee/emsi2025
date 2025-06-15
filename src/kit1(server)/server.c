@@ -61,7 +61,7 @@ int init_server(int port) {
 
     printf("Client connected!\n");
 
-    // 리슨 소켓은 닫고 클라이언트 소켓만 유지
+    // 리슨 소켓 닫고 클라이언트 소켓 유지
     close(server_sock);
     return client_sock;
 }
