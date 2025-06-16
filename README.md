@@ -23,6 +23,7 @@ CNDI eCUBE
 |led|Indicate Life |-|
 |fnd|Indicate Score|-|
 |textLCD|Displays the progress of the simulatrion|-|
+|LCD|Displays background and fire using frame buffer|-|
 
 ## System Overview
 - Device Communication (TCP socket)
