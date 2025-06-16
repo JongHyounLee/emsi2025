@@ -46,3 +46,4 @@ void getGyro(int gyro[]){
     fclose(fp);
     printf("I read Gyro : %d, %d, %d\r\n", gyro[0], gyro[1], gyro[2]);
 }
+
