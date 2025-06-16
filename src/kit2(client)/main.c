@@ -1,22 +1,23 @@
-#include "client.h"
-#include "button.h"
-#include "buzzer.h"
-#include "gyro.h"
+#include "lib/client.h"
+#include "lib/button.h"
+#include "lib/buzzer.h"
+#include "lib/gyro.h"
 #include <pthread.h>
 
 #define PORT 8888
+#define GAMEREADY -1 
+#define BUTTONPRESSED -5
+#define ENDSIGNAL -9
 
 int gyro[3];
 int sock;
 char SERVER[20];
 SOCKET_DATA socketData;
 
-void *readChange(void *arg)
-{
+void *readChange(void *arg) {
     while(1) {
         //printf("side%d\n",change);
-        if(move)
-        {
+        if(move) {
             buzzerTone(DO);
             delay_ms(100);
             buzzerStop();
@@ -48,6 +49,7 @@ int main() {
     int prev_key = -1;
     int msgID = msgget (MESSAGE_ID, IPC_CREAT|0666);
     socketData.cursor = 4;
+    //Connect to server
     sock = connect_server(SERVER, PORT);
     if (sock == -1)
       return 0;
@@ -74,11 +76,12 @@ int main() {
     while(1) {
         int returnValue = 0;
         returnValue = msgrcv(msgID, &Data, sizeof(Data) - sizeof(long int), 0, 0);
-  
+        
         if(Data.type == EV_KEY){
             if (Data.keyInput == KEY_HOME) {
+                // when button pressed
                 if (Data.pressed && !(prev_pressed && prev_key == KEY_HOME)) {
-                    socketData.buttonPressed = -5;
+                    socketData.buttonPressed = BUTTONPRESSED;
                     send(sock, &(socketData.buttonPressed), sizeof(int), NULL);
                     printf("send : %d, buttonPressed : %d \r\n", socketData.cursor, socketData.buttonPressed);
                     socketData.buttonPressed = 0;
@@ -87,13 +90,24 @@ int main() {
                     buzzerStop();
                 }
             }
+            else if (Data.keyInput == KEY_VOLUMEDOWN) {
+                // Exit game
+                if (Data.pressed && !(prev_pressed && prev_key == KEY_VOLUMEDOWN)) {
+                    socketData.endSignal = ENDSIGNAL;
+                    send(sock, &(socketData.endSignal), sizeof(int), NULL);
+                    printf("send : %d, Exit game~\r\n", socketData.endSignal);
+                    // close all files.. break didnt work well. I dont know why
+                    pthread_join(&Buzz, NULL);
+                    pthread_join(&GyroTh, NULL);
+                    buttonExit();
+                    buzzerExit();
+                    close(sock);
+                    printf("main done\r\n");
+                    return 0;
+                }
+            }
         }
     }
 
-    buttonExit();
-    buzzerExit();
-    close(sock);
-
-    printf("main done\r\n");
     return 0;
 }
