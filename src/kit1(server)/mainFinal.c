@@ -1,11 +1,3 @@
-//1. 처음 random한 4구역에 불 생성
-//2. 불을 끄면 해당 fire array에 '0'  &  끈 시간에 따라 점수 차등 부여 (금방 끄면 +5점, 늦으면 +1점 등)
-//3. 만약 불을 못 끄고 5초가 지나면 fire array '0'  &  점수 -5 점
-//4. 4초에 한 번 불이 없는 fire array 하나에 새로운 불 생성 
-
-// main문 : scanf로 'cursor'변수 값, 'water'변수 1 을 차례로 받아 thread로 전달
-//          (sursor, water 변수 kit2에서 받는거 구현되면 삭제 필요)
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -28,11 +20,6 @@
 #define FRAME_PATH_FMT "fire_img/output_%04d.jpg"
 #define FRAME_NUM      210
 #define TARGET_FPS     30
-
-// //brackground 
-// #define FRAME_PATH_FMT "jpg/output_%04d.jpg"
-// #define FRAME_NUM      704               // 예: 1분=30fps*60초
-// #define TARGET_FPS     30
 
 int target_fps = 30;
 int frame_num = 705;
@@ -91,7 +78,6 @@ const int cursor_center[9][2] = {
 
 int cursor_moved = 0;
 
-//chogiwha
 void *fire_clear() {
 
 
@@ -484,7 +470,6 @@ void *Fire_and_Cursor(void *arg) {
 
 
     // 2. mmap으로 Framebuffer 포인터 얻기
-    
     if (fb_ptr == MAP_FAILED) {
         perror("mmap");
         close(fb_fd);
@@ -525,7 +510,6 @@ void *Fire_and_Cursor(void *arg) {
         jpeg_destroy_decompress(&cinfo);
         fclose(fp);
 
-        ////////////////////////////////////////////////////////////////////////////
         // 4. 각 fire[i] 값에 따라 이미지 그리기
         for (int j = 0; j < 9; ++j) {
             
@@ -550,7 +534,6 @@ void *Fire_and_Cursor(void *arg) {
         }
 
         // 커서(빨간 점) 그리기
-        
         int cx = cursor_center[cursor][0];
         int cy = cursor_center[cursor][1];
         
