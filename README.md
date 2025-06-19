@@ -7,7 +7,7 @@ CNDI eCUBE
 <img src="https://github.com/user-attachments/assets/0abd7804-e528-4b7a-9f1d-8f9858d05f10" width="600" height="400"/>
 -  Ubuntu 14.0LTS
 -  NXP i.MX6 ARM Quad-Core 1G HZ
--  LCD, FND, Buzzer, LED, Button, Gyro, Aceel, Magnet, Temp sensor, ColrLED
+-  LCD, FND, Buzzer, LED, Button, Gyro, Aceel, Magnet, Temp sensor, ColorLED
 -  12V 3A DC power Requried
 
 ## breif 
