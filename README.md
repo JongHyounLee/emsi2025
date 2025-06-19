@@ -47,7 +47,7 @@ CNDI eCUBE
 4. Hold Kit2 like a gun to simulate aiming and shooting.
 5. Press the HOME button on Kit2 to start the simulation.
 6. The aim (blue dot) on Kit1's screen updates in real-time based on Kit2’s movement.
-7. Press the VOL_UP button on Kit2 to exit the simulation.
+7. Press the VOL_DOWN button on Kit2 to exit the simulation.
 
 ## Flow Chart
 <img width="9450" alt="Image" src="https://github.com/user-attachments/assets/6a9da4ff-ada6-4a8a-ae14-6d92c9b9db2e" />  
