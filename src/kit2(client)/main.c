@@ -32,7 +32,6 @@ void *readChange(void *arg) {
             #endif
         }
     }
-
 }
 
 void initSensors() {
@@ -41,19 +40,23 @@ void initSensors() {
 }
 
 int main() {
-    printf("Input server IP : ");
-    scanf("%s", SERVER);
+    int msgID = msgget (MESSAGE_ID, IPC_CREAT|0666);
     BUTTON_MSG_T Data;
-    initSensors();
+
     int prev_pressed = 0;
     int prev_key = -1;
-    int msgID = msgget (MESSAGE_ID, IPC_CREAT|0666);
     socketData.cursor = 4;
-    //Connect to server
+    initSensors();
+
+    // connect to server
+    printf("Input server IP : ");
+    scanf("%s", SERVER);    
+
     sock = connect_server(SERVER, PORT);
     if (sock == -1)
       return 0;
 
+    initSensors();
     // sending gameReady
     printf("press Any Key to start\r\n");
     while(1) {
