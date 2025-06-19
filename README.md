@@ -50,5 +50,7 @@ CNDI eCUBE
 7. Press the VOL_UP button on Kit2 to exit the simulation.
 
 ## Flow Chart
-needs to be updated
+<img width="9450" alt="Image" src="https://github.com/user-attachments/assets/6a9da4ff-ada6-4a8a-ae14-6d92c9b9db2e" />  
+
 ## Demo 
+[Video](https://youtube.com/shorts/hgmQWAQHwIo)
