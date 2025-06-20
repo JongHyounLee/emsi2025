@@ -34,7 +34,6 @@ void GyroInit(void)
 void *Gyroread(void *arg)
 {
 
-
     while (1)
     {
         fclose(fp);

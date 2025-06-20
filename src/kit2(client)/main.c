@@ -53,8 +53,10 @@ int main() {
     scanf("%s", SERVER);    
 
     sock = connect_server(SERVER, PORT);
-    if (sock == -1)
-      return 0;
+    if (sock == -1) {
+        printf("Failed to Connect to Server : \r\n");
+        return 0;
+    }
 
     initSensors();
     // sending gameReady
